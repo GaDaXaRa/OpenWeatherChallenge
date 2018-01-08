@@ -11,10 +11,16 @@ import Foundation
 protocol WeatherParser {
     associatedtype Parseable
     func parse(info: Parseable) -> Weather?
+    func parse(_ :Parseable) -> [Weather]?
 }
 
 struct JSONWeatherParser: WeatherParser {
     typealias Parseable = [String: Any]
+    
+    func parse(_ items: [String : Any]) -> [Weather]? {
+        guard let list = items["list"] as? [[String: Any]] else {return nil}
+        return list.flatMap({parse(info: $0)})
+    }
     
     func parse(info: [String : Any]) -> Weather? {
         guard let dateTimestamp = info["dt"] as? Double, let main = info["main"] as? [String: Any], let temperature = main["temp"] as? Double else {
@@ -26,6 +32,10 @@ struct JSONWeatherParser: WeatherParser {
 }
 
 struct CSVWeatherParser: WeatherParser {
+    func parse(_ items: String) -> [Weather]? {
+        return items.components(separatedBy: CharacterSet.newlines).flatMap({parse(info: $0)})
+    }
+    
     typealias Parseable = String
     
     func parse(info: String) -> Weather? {

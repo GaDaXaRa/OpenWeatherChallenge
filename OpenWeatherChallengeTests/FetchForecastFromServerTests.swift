@@ -26,4 +26,15 @@ class FetchForecastFromServerTests: XCTestCase {
         XCTAssertEqual(weather?.date, Date(timeIntervalSince1970: TimeInterval(1487246400)))
     }
     
+    func testShouldParseAllWeatherJSON() {
+        let sut = JSONWeatherParser()
+        let weatherList = sut.parse(Mocks.allWeatherJSON)
+        XCTAssertEqual(weatherList?.count, 36)
+    }
+    
+    func testShouldParseAllWeatherCSV() {
+        let sut = CSVWeatherParser()
+        let weatherList = sut.parse(Mocks.allWeatherCSV)
+        XCTAssertEqual(weatherList?.count, 5)
+    }
 }
