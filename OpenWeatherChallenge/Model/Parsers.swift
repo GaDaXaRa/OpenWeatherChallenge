@@ -10,20 +10,20 @@ import Foundation
 
 protocol WeatherParser {
     associatedtype Parseable
-    func parse(info: Parseable) -> Weather?
-    func parse(_ :Parseable) -> [Weather]?
+    func parse(one: Parseable) -> Weather?
+    func parse(all: Parseable) -> [Weather]?
 }
 
 struct JSONWeatherParser: WeatherParser {
     typealias Parseable = [String: Any]
     
-    func parse(_ items: [String : Any]) -> [Weather]? {
+    func parse(all items: [String : Any]) -> [Weather]? {
         guard let list = items["list"] as? [[String: Any]] else {return nil}
-        return list.flatMap({parse(info: $0)})
+        return list.flatMap({parse(one: $0)})
     }
     
-    func parse(info: [String : Any]) -> Weather? {
-        guard let dateTimestamp = info["dt"] as? Double, let main = info["main"] as? [String: Any], let temperature = main["temp"] as? Double else {
+    func parse(one item: [String : Any]) -> Weather? {
+        guard let dateTimestamp = item["dt"] as? Double, let main = item["main"] as? [String: Any], let temperature = main["temp"] as? Double else {
             return nil
         }
         
@@ -34,14 +34,14 @@ struct JSONWeatherParser: WeatherParser {
 struct CSVWeatherParser: WeatherParser {    
     typealias Parseable = String
     
-    func parse(_ items: String) -> [Weather]? {
-        return items.components(separatedBy: CharacterSet.newlines).flatMap({parse(info: $0)})
+    func parse(all items: String) -> [Weather]? {
+        return items.components(separatedBy: CharacterSet.newlines).flatMap({parse(one: $0)})
     }
     
-    func parse(info: String) -> Weather? {
+    func parse(one item: String) -> Weather? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let components = info.components(separatedBy: ",")
+        let components = item.components(separatedBy: ",")
         guard components.count > 1, let date = dateFormatter.date(from: components.first!), let temperature = Double(components[1]) else {
             return nil            
         }
