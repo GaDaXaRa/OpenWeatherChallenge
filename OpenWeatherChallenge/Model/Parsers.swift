@@ -31,12 +31,12 @@ struct JSONWeatherParser: WeatherParser {
     }
 }
 
-struct CSVWeatherParser: WeatherParser {
+struct CSVWeatherParser: WeatherParser {    
+    typealias Parseable = String
+    
     func parse(_ items: String) -> [Weather]? {
         return items.components(separatedBy: CharacterSet.newlines).flatMap({parse(info: $0)})
     }
-    
-    typealias Parseable = String
     
     func parse(info: String) -> Weather? {
         let dateFormatter = DateFormatter()

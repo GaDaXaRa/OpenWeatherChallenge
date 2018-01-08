@@ -10,7 +10,7 @@ import XCTest
 
 @testable import OpenWeatherChallenge
 
-class FetchForecastFromServerTests: XCTestCase {
+class ParsersTests: XCTestCase {
     
     func testShouldParseSingleWeatherJSON() {
         let sut = JSONWeatherParser()
