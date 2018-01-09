@@ -67,6 +67,6 @@ extension Weather: TemperatureCellViewModel {
     }
     
     var temperatureText: String {
-        return String(temperature)
+        return String(Int(temperature))
     }    
 }
