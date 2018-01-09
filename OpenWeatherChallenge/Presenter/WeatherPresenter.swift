@@ -61,7 +61,9 @@ extension DayForecast: DayCellViewModel {
 
 extension Weather: TemperatureCellViewModel {
     var timeText: String {
-        return DateFormatter.dateFormat(fromTemplate: "HH:mm", options: 0, locale: nil)!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
     }
     
     var temperatureText: String {
