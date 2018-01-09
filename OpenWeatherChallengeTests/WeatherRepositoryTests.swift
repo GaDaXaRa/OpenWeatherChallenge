@@ -13,7 +13,7 @@ import XCTest
 class WeatherRepositoryTests: XCTestCase {
     
     func testShouldReturnDayForecast() {
-        let sut = WeatherRepository<CSVWeatherParser, DiskCSVProvider>()
+        let sut = AgnosticWeatherRepository<CSVWeatherParser, DiskCSVProvider>()
         let sutExpectation = expectation(description: "fetch forecast expectation")
         
         sut.fetchForecast { (forecasts) in

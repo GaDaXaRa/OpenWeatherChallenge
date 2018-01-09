@@ -13,7 +13,11 @@ struct DayForecast {
     let forecast: [Weather]
 }
 
-class WeatherRepository<Parser: WeatherParser, Provider: WeatherProvider> where Provider.Returnable == Parser.Parseable {
+protocol WeatherRepository {
+    func fetchForecast(_ completion: @escaping ([DayForecast]?) -> ())
+}
+
+class AgnosticWeatherRepository<Parser: WeatherParser, Provider: WeatherProvider>: WeatherRepository where Provider.Returnable == Parser.Parseable {
     
     func fetchForecast(_ completion: @escaping ([DayForecast]?) -> ()) {
         Provider().obtainData { (result) in

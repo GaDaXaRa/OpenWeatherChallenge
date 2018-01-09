@@ -17,6 +17,10 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         presenter.view = self
     }
+   
+    @IBAction func sourceChanged(_ sender: UISegmentedControl) {
+        presenter.didChangeSource(to: sender.selectedSegmentIndex)
+    }    
 }
 
 extension ViewController: WeatherListView {
@@ -37,7 +41,6 @@ extension ViewController: UITableViewDataSource {
         cell.configure(with: presenter.dayViewModel(at: indexPath))
         cell.collectionView.dataSource = self
         cell.collectionView.tag = indexPath.row
-        cell.collectionView.reloadData()
         return cell
     }
 }

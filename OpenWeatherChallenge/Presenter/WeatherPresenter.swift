@@ -12,6 +12,19 @@ protocol WeatherListView: class {
     func reload()
 }
 
+enum WeatherSource: Int {
+    case Remote, Local
+    
+    var repository: WeatherRepository {
+        switch self {
+        case .Remote:
+            return AgnosticWeatherRepository<JSONWeatherParser, HttpJSONProvider>()
+        case .Local:
+            return AgnosticWeatherRepository<CSVWeatherParser, DiskCSVProvider>()
+        }
+    }
+}
+
 class WeatherPresenter: NSObject {
     
     weak var view: WeatherListView? {
@@ -26,8 +39,14 @@ class WeatherPresenter: NSObject {
         }
     }
     
+    private var currentSource: WeatherSource? = .Remote {
+        didSet {
+            loadForecast()
+        }
+    }
+    
     private func loadForecast() {
-        WeatherRepository<JSONWeatherParser, HttpJSONProvider>().fetchForecast { [weak self] (forecasts) in
+        currentSource?.repository.fetchForecast { [weak self] (forecasts) in
             self?.forecasts = forecasts
         }
     }
@@ -48,6 +67,10 @@ class WeatherPresenter: NSObject {
     func temperatureViewModel(in index: Int, at indexPath: IndexPath) -> TemperatureCellViewModel {
         guard let forecasts = forecasts else {fatalError("Trying to access forecast before been loaded")}
         return forecasts[index].forecast[indexPath.row]
+    }
+    
+    func didChangeSource(to index: Int) {
+        currentSource = WeatherSource(rawValue: index)
     }
 }
 

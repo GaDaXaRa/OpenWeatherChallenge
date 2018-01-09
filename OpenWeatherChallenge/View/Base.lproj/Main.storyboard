@@ -20,11 +20,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qnd-Gq-dKY">
-                                <rect key="frame" x="127" y="28" width="121" height="29"/>
+                                <rect key="frame" x="126" y="28" width="123" height="29"/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Remote"/>
+                                    <segment title="Local"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sourceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="qV6-ic-hYK"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j9Q-hF-PEu">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
