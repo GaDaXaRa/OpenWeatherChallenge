@@ -38,23 +38,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgw-W2-ABd">
-                                                    <rect key="frame" x="15" y="11" width="345" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="345" height="12.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ghm-8o-iSb">
-                                                    <rect key="frame" x="0.0" y="40" width="375" height="111.5"/>
+                                                    <rect key="frame" x="0.0" y="31.5" width="375" height="120"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mH6-5y-rWq">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="120" id="XFX-e0-Y52"/>
+                                                    </constraints>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mH6-5y-rWq">
                                                         <size key="itemSize" width="100" height="100"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="temperatureCell" id="mYt-z7-rhO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="temperatureCell" id="mYt-z7-rhO" customClass="TemperatureCollectionViewCell" customModule="OpenWeatherChallenge" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="10" width="100" height="100"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -67,7 +70,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sbk-Wq-FCj">
-                                                                        <rect key="frame" x="16" y="24" width="68" height="60"/>
+                                                                        <rect key="frame" x="16" y="24" width="68" height="40"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -83,6 +86,10 @@
                                                                 <constraint firstItem="Sbk-Wq-FCj" firstAttribute="top" secondItem="At0-IH-UNw" secondAttribute="bottom" constant="8" id="snX-lG-PGe"/>
                                                                 <constraint firstAttribute="bottomMargin" secondItem="Sbk-Wq-FCj" secondAttribute="bottom" constant="8" id="y0H-k0-hUt"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="temperatureLabel" destination="Sbk-Wq-FCj" id="Ith-bh-whU"/>
+                                                                <outlet property="timeLabel" destination="At0-IH-UNw" id="81H-82-g7t"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -98,6 +105,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="collectionView" destination="Ghm-8o-iSb" id="aSU-nY-cy4"/>
                                             <outlet property="titleLabel" destination="kgw-W2-ABd" id="9I2-Rh-Kuj"/>
                                         </connections>
                                     </tableViewCell>

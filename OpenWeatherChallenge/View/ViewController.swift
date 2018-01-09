@@ -35,6 +35,21 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "dayCell") as! DayTableViewCell
         cell.configure(with: presenter.dayViewModel(at: indexPath))
+        cell.collectionView.dataSource = self
+        cell.collectionView.tag = indexPath.row
+        cell.collectionView.reloadData()
+        return cell
+    }
+}
+
+extension ViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter.numberOfTemperature(at: collectionView.tag)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView .dequeueReusableCell(withReuseIdentifier: "temperatureCell", for: indexPath) as! TemperatureCollectionViewCell
+        cell.configure(with: presenter.temperatureViewModel(in: collectionView.tag, at: indexPath))
         return cell
     }
 }
