@@ -12,6 +12,7 @@ protocol WeatherParser {
     associatedtype Parseable
     func parse(one: Parseable) -> Weather?
     func parse(all: Parseable) -> [Weather]?
+    init()
 }
 
 struct JSONWeatherParser: WeatherParser {
