@@ -31,7 +31,7 @@ class HttpJSONProvider: WeatherProvider {
             }
             
             completion(json)
-        }
+        }.resume()
     }
 }
 

@@ -10,6 +10,8 @@
 		3F17A6A620040CA4004FD5D5 /* DataProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17A6A520040CA4004FD5D5 /* DataProviders.swift */; };
 		3F17A6A820053385004FD5D5 /* weather.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3F17A6A720053385004FD5D5 /* weather.csv */; };
 		3F17A6AA2005414E004FD5D5 /* WeatherRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17A6A92005414E004FD5D5 /* WeatherRepositoryTests.swift */; };
+		3F17A6AE20054E27004FD5D5 /* WeatherPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17A6AD20054E27004FD5D5 /* WeatherPresenter.swift */; };
+		3F17A6B2200550C6004FD5D5 /* DayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17A6B1200550C6004FD5D5 /* DayTableViewCell.swift */; };
 		3FCBD72A2003EA5C0051F9C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBD7292003EA5C0051F9C0 /* AppDelegate.swift */; };
 		3FCBD72C2003EA5C0051F9C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBD72B2003EA5C0051F9C0 /* ViewController.swift */; };
 		3FCBD72F2003EA5C0051F9C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FCBD72D2003EA5C0051F9C0 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 		3F17A6A520040CA4004FD5D5 /* DataProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviders.swift; sourceTree = "<group>"; };
 		3F17A6A720053385004FD5D5 /* weather.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weather.csv; sourceTree = "<group>"; };
 		3F17A6A92005414E004FD5D5 /* WeatherRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepositoryTests.swift; sourceTree = "<group>"; };
+		3F17A6AD20054E27004FD5D5 /* WeatherPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPresenter.swift; sourceTree = "<group>"; };
+		3F17A6B1200550C6004FD5D5 /* DayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTableViewCell.swift; sourceTree = "<group>"; };
 		3FCBD7262003EA5C0051F9C0 /* OpenWeatherChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeatherChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FCBD7292003EA5C0051F9C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FCBD72B2003EA5C0051F9C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +74,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F17A6AC20054E07004FD5D5 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				3F17A6AD20054E27004FD5D5 /* WeatherPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		3F17A6AF20055093004FD5D5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3F17A6B0200550A9004FD5D5 /* Cells */,
+				3FCBD72B2003EA5C0051F9C0 /* ViewController.swift */,
+				3FCBD72D2003EA5C0051F9C0 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3F17A6B0200550A9004FD5D5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3F17A6B1200550C6004FD5D5 /* DayTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		3FCBD71D2003EA5C0051F9C0 = {
 			isa = PBXGroup;
 			children = (
@@ -93,9 +123,9 @@
 			children = (
 				3FCBD7502003EC930051F9C0 /* Model */,
 				3FCBD7492003EAE60051F9C0 /* UseCases */,
+				3F17A6AC20054E07004FD5D5 /* Presenter */,
+				3F17A6AF20055093004FD5D5 /* View */,
 				3FCBD7292003EA5C0051F9C0 /* AppDelegate.swift */,
-				3FCBD72B2003EA5C0051F9C0 /* ViewController.swift */,
-				3FCBD72D2003EA5C0051F9C0 /* Main.storyboard */,
 				3FCBD7302003EA5C0051F9C0 /* Assets.xcassets */,
 				3FCBD7322003EA5C0051F9C0 /* LaunchScreen.storyboard */,
 				3FCBD7352003EA5C0051F9C0 /* Info.plist */,
@@ -239,6 +269,8 @@
 			files = (
 				3F17A6A620040CA4004FD5D5 /* DataProviders.swift in Sources */,
 				3FCBD72C2003EA5C0051F9C0 /* ViewController.swift in Sources */,
+				3F17A6B2200550C6004FD5D5 /* DayTableViewCell.swift in Sources */,
+				3F17A6AE20054E27004FD5D5 /* WeatherPresenter.swift in Sources */,
 				3FCBD7522003EC9E0051F9C0 /* Weather.swift in Sources */,
 				3FCBD72A2003EA5C0051F9C0 /* AppDelegate.swift in Sources */,
 				3FCBD7542003ED620051F9C0 /* Parsers.swift in Sources */,
