@@ -20,8 +20,8 @@ protocol WeatherRepository {
 class AgnosticWeatherRepository<Parser: WeatherParser, Provider: WeatherProvider>: WeatherRepository where Provider.Returnable == Parser.Parseable {
     
     func fetchForecast(_ completion: @escaping ([DayForecast]?) -> ()) {
-        Provider().obtainData { (result) in
-            guard let result = result, let weatherList = Parser().parse(all: result) else {
+        Provider.obtainData { (result) in
+            guard let result = result, let weatherList = Parser.parse(all: result) else {
                 completion(nil)
                 return
             }

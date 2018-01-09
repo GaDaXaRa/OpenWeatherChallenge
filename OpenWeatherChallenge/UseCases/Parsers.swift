@@ -10,20 +10,19 @@ import Foundation
 
 protocol WeatherParser {
     associatedtype Parseable
-    func parse(one: Parseable) -> Weather?
-    func parse(all: Parseable) -> [Weather]?
-    init()
+    static func parse(one: Parseable) -> Weather?
+    static func parse(all: Parseable) -> [Weather]?
 }
 
 struct JSONWeatherParser: WeatherParser {
     typealias Parseable = [String: Any]
     
-    func parse(all items: [String : Any]) -> [Weather]? {
+    static func parse(all items: [String : Any]) -> [Weather]? {
         guard let list = items["list"] as? [[String: Any]] else {return nil}
         return list.flatMap({parse(one: $0)})
     }
     
-    func parse(one item: [String : Any]) -> Weather? {
+    static func parse(one item: [String : Any]) -> Weather? {
         guard let dateTimestamp = item["dt"] as? Double, let main = item["main"] as? [String: Any], let temperature = main["temp"] as? Double else {
             return nil
         }
@@ -35,11 +34,11 @@ struct JSONWeatherParser: WeatherParser {
 struct CSVWeatherParser: WeatherParser {    
     typealias Parseable = String
     
-    func parse(all items: String) -> [Weather]? {
+    static func parse(all items: String) -> [Weather]? {
         return items.components(separatedBy: CharacterSet.newlines).flatMap({parse(one: $0)})
     }
     
-    func parse(one item: String) -> Weather? {
+    static func parse(one item: String) -> Weather? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let components = item.components(separatedBy: ",")

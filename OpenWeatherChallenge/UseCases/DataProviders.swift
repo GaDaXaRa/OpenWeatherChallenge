@@ -10,20 +10,15 @@ import Foundation
 
 protocol WeatherProvider {
     associatedtype Returnable
-    func obtainData(_: @escaping (Returnable?) -> ())
-    init()
+    static func obtainData(_: @escaping (Returnable?) -> ())
 }
 
 class HttpJSONProvider: WeatherProvider {
     typealias Returnable = [String: Any]
     
-    required init() {
-        
-    }
+    static private let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast?q=London&appid=60f59ba7225e7acf3212a80f80a8b990")!
     
-    private let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast?q=London&appid=60f59ba7225e7acf3212a80f80a8b990")!
-    
-    func obtainData(_ completion: @escaping ([String : Any]?) -> ()) {
+    static func obtainData(_ completion: @escaping ([String : Any]?) -> ()) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil, let data = data, let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                 completion(nil)
@@ -38,13 +33,9 @@ class HttpJSONProvider: WeatherProvider {
 class DiskCSVProvider: WeatherProvider {
     typealias Returnable = String
     
-    required init() {
-        
-    }
+    static private let filePath = Bundle.main.url(forResource: "weather", withExtension: "csv")!
     
-    private let filePath = Bundle.main.url(forResource: "weather", withExtension: "csv")!
-    
-    func obtainData(_ completion: @escaping (String?) -> ()) {
+    static func obtainData(_ completion: @escaping (String?) -> ()) {
         DispatchQueue.global().async {
             guard let text = try? String(contentsOf: self.filePath, encoding: .utf8) else {
                 completion(nil)
